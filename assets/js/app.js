@@ -33,6 +33,14 @@ function eksekusiModalProses(d, statusAman) {
     document.getElementById("p_res_nama").innerText = d.nama;
     document.getElementById("p_res_status").innerText = statusAman;
 
+    // Menampilkan Tanggal Input (Perbaikan Sinkronisasi)
+    if (d.tgl_input && d.tgl_input.trim() !== "") {
+        document.getElementById("p_res_tgl_input").innerText = d.tgl_input.split('-').reverse().join('-');
+        document.getElementById("p_baris_tgl_input").style.display = "flex";
+    } else {
+        document.getElementById("p_baris_tgl_input").style.display = "none";
+    }
+
     for(let i=1; i<=6; i++) document.getElementById('p_step_'+i).className = 'timeline-step';
     
     if (statusAman === "Permohonan Masuk") { document.getElementById('p_step_1').classList.add('active'); }
@@ -54,6 +62,14 @@ function eksekusiModalSelesai(d, statusAman, tempo) {
         document.getElementById("s_res_tgl").innerText = d.tgl.split('-').reverse().join('-');
     } else {
         document.getElementById("s_res_tgl").innerText = "Selesai";
+    }
+
+    // Menampilkan Tanggal Input (Perbaikan Sinkronisasi)
+    if (d.tgl_input && d.tgl_input.trim() !== "") {
+        document.getElementById("s_res_tgl_input").innerText = d.tgl_input.split('-').reverse().join('-');
+        document.getElementById("s_baris_tgl_input").style.display = "flex";
+    } else {
+        document.getElementById("s_baris_tgl_input").style.display = "none";
     }
 
     const kotakBatas = document.getElementById("baris_batas_waktu");
@@ -97,9 +113,11 @@ document.getElementById("formCekImigrasi").addEventListener("submit", function(e
                 const statusAman = res.data.status_saat_ini.replace(/&amp;/g, '&');
                 
                 if (statusAman === "Paspor Selesai / Bisa Diambil") {
-                    eksekusiModalSelesai({ nomor: res.data.no_permohonan, nama: res.data.nama_pemohon, tgl: res.data.tgl_lahir }, statusAman, res.data.info_tempo);
+                    // PERBAIKAN: Melempar variabel tgl_input ke eksekusiModalSelesai
+                    eksekusiModalSelesai({ nomor: res.data.no_permohonan, nama: res.data.nama_pemohon, tgl: res.data.tgl_lahir, tgl_input: res.data.tanggal_input }, statusAman, res.data.info_tempo);
                 } else {
-                    eksekusiModalProses({ nomor: res.data.no_permohonan, nama: res.data.nama_pemohon }, statusAman);
+                    // PERBAIKAN: Melempar variabel tgl_input ke eksekusiModalProses
+                    eksekusiModalProses({ nomor: res.data.no_permohonan, nama: res.data.nama_pemohon, tgl_input: res.data.tanggal_input }, statusAman);
                 }
             } else {
                 eksekusiModalGagal("Tidak Ditemukan", "Nomor permohonan <strong>" + noInput + "</strong> tidak terdaftar di dalam sistem.");

@@ -200,6 +200,12 @@
                         <span class="imig-data-label">Nama Pemohon</span>
                         <span class="imig-data-value" id="p_res_nama"></span>
                     </div>
+                    
+                    <div class="imig-data-item" id="p_baris_tgl_input" style="display:none;">
+                        <span class="imig-data-label">Tanggal Input Berkas</span>
+                        <span class="imig-data-value" id="p_res_tgl_input"></span>
+                    </div>
+
                     <div class="imig-data-item" style="border-bottom:none; padding-bottom:0;">
                         <span class="imig-data-label">Status Saat Ini</span>
                         <span class="imig-data-value status-highlight" id="p_res_status" style="background: rgba(2, 132, 199, 0.1); color: #0284c7;"></span>
@@ -242,6 +248,11 @@
                     <div class="imig-data-item">
                         <span class="imig-data-label">Tanggal Lahir</span>
                         <span class="imig-data-value" id="s_res_tgl"></span>
+                    </div>
+
+                    <div class="imig-data-item" id="s_baris_tgl_input" style="display:none;">
+                        <span class="imig-data-label">Tanggal Input Berkas</span>
+                        <span class="imig-data-value" id="s_res_tgl_input"></span>
                     </div>
                     
                     <div class="imig-data-item" id="baris_batas_waktu" style="display:none;">

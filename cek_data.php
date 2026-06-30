@@ -22,8 +22,8 @@ if (file_exists('pelacak_akses.php')) {
     catat_log_pencarian($conn, $no_permohonan);
 }
 
-// TAMBAHAN: Memanggil kolom 'tgl_permohonan' dari database
-$query = "SELECT no_permohonan, nama_pemohon, tgl_lahir, status_saat_ini, tgl_permohonan FROM permohonan WHERE no_permohonan = ? LIMIT 1";
+// PERBAIKAN: Memanggil kolom 'tanggal_input' dari database
+$query = "SELECT no_permohonan, nama_pemohon, tgl_lahir, status_saat_ini, tanggal_input FROM permohonan WHERE no_permohonan = ? LIMIT 1";
 $stmt = mysqli_prepare($conn, $query);
 
 if ($stmt) {
@@ -35,8 +35,9 @@ if ($stmt) {
         
         // --- MESIN KALKULATOR BATAS 30 HARI ---
         $data_waktu = null;
-        if (!empty($row['tgl_permohonan'])) {
-            $tgl_wawancara = strtotime($row['tgl_permohonan']);
+        // PERBAIKAN: Mengecek dari 'tanggal_input'
+        if (!empty($row['tanggal_input'])) {
+            $tgl_wawancara = strtotime($row['tanggal_input']);
             $tgl_kadaluarsa = strtotime('+30 days', $tgl_wawancara);
             $hari_ini       = strtotime(date('Y-m-d'));
             
@@ -48,7 +49,7 @@ if ($stmt) {
             if ($sisa_hari < 0) {
                 $status_waktu = 'HANGUS'; // Sudah lewat 30 hari
             } elseif ($sisa_hari <= 5) {
-                $status_waktu = 'KRITIS'; // Tinggal $\le$ 5 hari lagi
+                $status_waktu = 'KRITIS'; // Tinggal <= 5 hari lagi
             }
 
             $data_waktu = [
@@ -63,8 +64,9 @@ if ($stmt) {
             'no_permohonan'   => htmlspecialchars($row['no_permohonan'], ENT_QUOTES, 'UTF-8'),
             'nama_pemohon'    => htmlspecialchars($row['nama_pemohon'], ENT_QUOTES, 'UTF-8'),
             'tgl_lahir'       => htmlspecialchars($row['tgl_lahir'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'tanggal_input'   => htmlspecialchars($row['tanggal_input'] ?? '', ENT_QUOTES, 'UTF-8'), // <-- Tambahkan ini
             'status_saat_ini' => htmlspecialchars($row['status_saat_ini'], ENT_QUOTES, 'UTF-8'),
-            'info_tempo'      => $data_waktu // Dikirim ke frontend
+            'info_tempo'      => $data_waktu
         ];
         
         echo json_encode(['status' => 'success', 'data' => $data_aman]);

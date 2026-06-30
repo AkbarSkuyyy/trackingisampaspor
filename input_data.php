@@ -123,7 +123,6 @@ $total_pages = ceil($total_data / $limit);
             <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 20px;">Gunakan form ini untuk memasukkan data baru secara manual, atau memperbaiki status/kesalahan data.</p>
             
             <form method="POST">
-                <!-- Baris 1: No Permohonan & Nama -->
                 <div class="form-row">
                     <div class="form-group">
                         <label>Nomor Permohonan</label>
@@ -135,20 +134,17 @@ $total_pages = ceil($total_data / $limit);
                     </div>
                 </div>
                 
-                <!-- Baris 2: Tanggal Lahir & Tanggal Input -->
                 <div class="form-row">
                     <div class="form-group">
                         <label>Tanggal Lahir</label>
-                        <input type="date" name="tgl_lahir" id="inp_tgl" style="opacity:0.8;" required>
+                        <input type="date" name="tgl_lahir" id="inp_tgl" style="opacity:0.8;">
                     </div>
                     <div class="form-group">
                         <label>Tanggal Input Berkas</label>
-                        <!-- Default valuenya hari ini, tapi bisa diedit mundur/maju oleh admin jika perlu -->
                         <input type="date" name="tanggal_input" id="inp_tgl_input" value="<?= date('Y-m-d') ?>" required>
                     </div>
                 </div>
                 
-                <!-- Baris 3: Status -->
                 <div class="form-row">
                     <div class="form-group" style="width: 100%;">
                         <label>Status Saat Ini</label>
@@ -196,8 +192,7 @@ $total_pages = ceil($total_data / $limit);
                             <th>No Permohonan</th>
                             <th>Nama Pemohon</th>
                             <th>Tanggal Lahir</th>
-                            <th>Tgl Input</th> <!-- Kolom Baru -->
-                            <th>Status Paspor</th>
+                            <th>Tgl Input</th> <th>Status Paspor</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -216,11 +211,10 @@ $total_pages = ceil($total_data / $limit);
                                     <td><strong><?= htmlspecialchars($row['no_permohonan']) ?></strong></td>
                                     <td><?= htmlspecialchars($row['nama_pemohon']) ?></td>
                                     <td><?= $tgl_indo ?></td>
-                                    <td><?= $tgl_input_indo ?></td> <!-- Menampilkan Tanggal Input -->
-                                    <td><span class='badge'><?= htmlspecialchars($row['status_saat_ini']) ?></span></td>
+                                    <td><?= $tgl_input_indo ?></td> <td><span class='badge'><?= htmlspecialchars($row['status_saat_ini']) ?></span></td>
                                     <td>
                                         <div class="action-buttons">
-                                            <button type="button" class="btn-edit" onclick="editData('<?= htmlspecialchars($row['no_permohonan']) ?>', '<?= htmlspecialchars(addslashes($row['nama_pemohon'])) ?>', '<?= htmlspecialchars($row['tgl_lahir']) ?>', '<?= htmlspecialchars($row['tanggal_input']) ?>', '<?= htmlspecialchars($row['status_saat_ini']) ?>')" title="Edit Data">
+                                            <button type="button" class="btn-edit" onclick="editData('<?= htmlspecialchars($row['no_permohonan'] ?? '') ?>', '<?= htmlspecialchars(addslashes($row['nama_pemohon'] ?? '')) ?>', '<?= htmlspecialchars($row['tgl_lahir'] ?? '') ?>', '<?= htmlspecialchars($row['tanggal_input'] ?? '') ?>', '<?= htmlspecialchars($row['status_saat_ini'] ?? '') ?>')" title="Edit Data">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             

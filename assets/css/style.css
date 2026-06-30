@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box !important; }
+
+/* 1. Body & Background */
+body {
+    margin: 0; padding: 0 !important;
+    background-image: url('../images/DroneKantor.jpg');
+    background-size: cover; background-position: center;
+    background-attachment: fixed; background-repeat: no-repeat;
+    display: flex; flex-direction: column; min-height: 100vh;
+    font-family: 'Outfit', sans-serif; overflow-x: hidden;
+}
+
+/* --- HEADER FIX ATAS --- */
+#header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.topbar-resmi { background-color: #ffffff; border-bottom: 1px solid #e5e7eb; width: 100%; }
+.nav-container-fluid { width: 100%; padding: 0 30px; }
+.sub-header-row { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 4px 0; }
+#text_sub_header { margin: 0; font-size: 9pt; color: #000; }
+.accordion-trigger { color: #002D62 !important; text-decoration: none; }
+
+.panel-keamanan { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background-color: #ffffff; }
+.panel-keamanan.buka { max-height: 500px; padding-bottom: 15px; }
+.panel-row { display: flex; gap: 30px; padding: 12px 0; border-top: 1px solid #f3f4f6; }
+.info-wrapper { flex: 1; display: flex; gap: 12px; }
+.info-icon i.fa-circle { font-size: 6pt; color: #002D62; margin-top: 6px; }
+.info-icon i.fa-lock { color: #10b981; }
+.info-content { font-size: 9pt; color: #333; line-height: 1.5; }
+.info-title { font-weight: bold; color: #000; margin-bottom: 4px; }
+.info-title a { color: #002D62; text-decoration: underline; }
+.info-desc { margin: 0; color: #555; }
+
+/* Navbar Biru */
+.bg-biru-tua { background-color: #002D62 !important; color: #ffffff; width: 100%; }
+.navbar-main-row { position: relative !important; display: flex; align-items: center; justify-content: space-between; min-height: 70px; padding: 0 30px; }
+.left-side-toggle { display: flex; justify-content: flex-start; }
+
+.btn-toggle-burger { display: flex; align-items: center; gap: 8px; background: transparent; border: none !important; color: #ffffff; cursor: pointer; padding: 8px 15px; border-radius: 6px; transition: 0.3s; }
+.btn-toggle-burger:hover { background: rgba(255,255,255,0.1); }
+.btn-toggle-burger i { font-size: 1.2rem; }
+.menu-text-desktop { font-size: 1.05rem; font-weight: 600; font-family: "Outfit"; display: inline-block !important; }
+
+.logo-center-block { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; width: max-content; z-index: 5; padding: 10px 0; }
+.logo-center-block a { text-decoration: none; color: #ffffff; display: block; text-align: left !important; white-space: nowrap; }
+.logo-center-block strong { font-size: 14px; font-weight: 700; line-height: 1.4; letter-spacing: 0.5px; }
+
+
+/* ==========================================================================
+   SIDEBAR NAVIGASI & SUBMENU (PRESISI SESUAI GAMBAR REFERENSI)
+   ========================================================================== */
+.sidebar-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 40, 0.6); z-index: 1050; opacity: 0; visibility: hidden; transition: all 0.3s; }
+.sidebar-overlay.aktif { opacity: 1; visibility: visible; }
+
+.imigrasi-left-navbar {
+    position: fixed; top: 0; left: -320px; 
+    width: 300px; height: 100vh; background: #002D62; /* Biru gelap sidebar */
+    z-index: 1060; box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+    transition: left 0.3s ease;
+    overflow: visible !important; /* PENTING: Mencegah submenu terpotong */
+}
+.imigrasi-left-navbar.aktif { left: 0; }
+
+.sidebar-header-custom { color: white; padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sidebar-header-custom i { font-size: 1.4rem; transition: 0.3s; cursor:pointer; }
+.sidebar-header-custom i:hover { color: #ef4444; transform: rotate(90deg); }
+
+.sidebar-nav { list-style: none; padding: 10px 0; margin: 0; }
+.nav-item { position: relative; width: 100%; display: block; }
+
+.nav-link {
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 15px 30px; color: #ffffff; text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    transition: all 0.2s; border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+/* EFEK JEMBATAN: Saat menu induk disorot -> Kotak jadi PUTIH, teks jadi BIRU */
+.nav-item.has-submenu:hover > .nav-link,
+.nav-link:hover {
+    background-color: #ffffff !important;
+    color: #002D62 !important;
+    font-weight: 700;
+}
+.nav-item.has-submenu:hover > .nav-link i { color: #002D62 !important; }
+
+/* KOTAK SUBMENU MELOMPAT KE KANAN */
+.dropdown-box {
+    list-style: none; padding: 8px 0; margin: 0; 
+    background: #002D62; /* Warna dasar sama persis dengan sidebar */
+    box-shadow: 8px 5px 20px rgba(0, 0, 0, 0.35);
+    border-radius: 0 8px 8px 0; /* Sudut kanan melengkung */
+    border-left: 1px solid rgba(255,255,255,0.1);
+    
+    position: absolute;
+    top: 0;
+    left: 100%; /* Muncul tepat di sisi kanan item induk */
+    width: 270px;
+    z-index: 999999;
+    display: none; 
+}
+
+/* Muncul otomatis saat kursor di atas menu induk */
+.nav-item.has-submenu:hover .dropdown-box { display: block; }
+
+.submenu-item a {
+    display: block; padding: 13px 22px; color: #ffffff !important; text-decoration: none;
+    font-size: 0.92rem; font-weight: 400; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.2s;
+}
+.submenu-item:last-child a { border-bottom: none; }
+
+.submenu-item a:hover {
+    background-color: rgba(255,255,255,0.12);
+    color: #f9c74f !important; /* Kuning emas saat disentuh */
+    padding-left: 28px;
+}
+
+
+/* --- AREA WIDGET TRACKING --- */
+#widget-status-wrapper { background: rgba(0, 45, 98, 0.88) !important; backdrop-filter: blur(6px); width: 100%; min-height: 100vh; flex: 1; padding: 130px 20px 60px 20px; display: flex; justify-content: center; align-items: center; }
+.imig-widget-card-container { width: 100%; max-width: 600px; }
+.imig-widget-card { background-color: #ffffff; width: 100%; padding: 40px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-top: 6px solid #f9c74f; }
+.imig-widget-title { font-size: 2rem; font-weight: 800; color: #002D62; margin: 0 0 10px 0; text-align: center; }
+.imig-widget-desc { font-size: 1rem; color: #555; text-align: center; margin-bottom: 25px; }
+
+.imig-form-group { margin-bottom: 22px; width: 100%; }
+.imig-form-group label { display: block; font-size: 0.95rem; font-weight: 600; color: #002D62; margin-bottom: 8px; }
+.imig-form-group input[type="text"] { width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; background-color: #f9fafb; transition: 0.3s; font-family:'Outfit';}
+.imig-form-group input[type="text"]:focus { outline: none; border-color: #002D62; background-color: #fff; box-shadow: 0 0 0 3px rgba(0, 45, 98, 0.08); }
+
+.imig-captcha-row { display: flex; gap: 10px; align-items: center; }
+.imig-captcha-display { flex: 1.2; background: #eef2f7; border: 2px dashed #002D62; text-align: center; padding: 12px; font-weight: 800; font-size: 1.25rem; letter-spacing: 4px; color: #002D62; border-radius: 8px; user-select: none; }
+.imig-btn-refresh { background: #eef2f7; border: 1px solid #d1d5db; cursor: pointer; padding: 14px; border-radius: 8px; color: #4b5563; }
+.imig-btn-refresh:hover { background: #e2e8f0; color: #002D62; }
+.imig-captcha-row input { flex: 1.8; }
+
+.imig-btn-submit { width: 100%; padding: 16px; background-color: #cbd5e1; color: #ffffff; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: not-allowed; margin-bottom: 20px; transition: 0.3s; font-family:'Outfit';}
+.imig-btn-submit:not([disabled]) { background-color: #002D62; cursor: pointer; box-shadow: 0 8px 20px rgba(0, 45, 98, 0.2); }
+.imig-btn-submit:not([disabled]):hover { background-color: #f9c74f; color: #002D62; transform: translateY(-1px); }
+.imig-notes { font-size: 0.85rem; color: #4b5563; line-height: 1.5; display: flex; gap: 10px; background-color: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; }
+
+.mpaspor-promo-box { margin-top: 25px; background: linear-gradient(to right, #f8fafc, #f1f5f9); border: 1px solid #cbd5e1; border-radius: 10px; padding: 15px 18px; display: flex; align-items: center; gap: 15px; }
+.mpaspor-icon { background: #002D62; color: #f9c74f; width: 50px; height: 50px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0, 45, 98, 0.15); }
+.mpaspor-content { flex: 1; }
+.mpaspor-content h4 { margin: 0 0 3px 0; color: #002D62; font-size: 0.95rem; font-weight: 800; }
+.mpaspor-content p { margin: 0 0 10px 0; color: #475569; font-size: 0.8rem; line-height: 1.4; }
+.store-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-store { background: #ffffff; color: #0f172a !important; text-decoration: none; padding: 6px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+.btn-store:hover { background: #002D62; border-color: #002D62; color: #ffffff !important; transform: translateY(-2px); }
+
+/* --- FOOTER --- */
+#sp-footer { background-color: #002D62; color: #ffffff; padding: 35px 20px; text-align: center; width: 100%; margin-top: auto; border-top: 5px solid #f9c74f; }
+#sp-footer .container { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 15px; }
+#sp-footer .sp-copyright { display: inline-block; font-size: 15px; line-height: 1.8; letter-spacing: 0.5px; }
+
+/* --- POPUP MODAL --- */
+.imig-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,20,45,0.6); backdrop-filter: blur(3px); z-index: 99999; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; }
+.imig-popup-overlay.aktif { opacity: 1; visibility: visible; }
+.imig-popup-box { background: #fff; width: 90%; max-width: 450px; border-radius: 12px; padding-bottom: 20px; text-align: center; transform: translateY(-20px); transition: 0.3s; }
+.imig-popup-overlay.aktif .imig-popup-box { transform: translateY(0); }
+.imig-popup-icon { padding: 25px; font-size: 3.2rem; }
+.ikon-sukses { color: #10b981; } .ikon-gagal { color: #ef4444; }
+.imig-popup-title { font-size: 1.5rem; font-weight: 800; color: #002D62; margin-bottom: 15px; }
+.imig-popup-message { padding: 0 20px; color: #4b5563; }
+.imig-data-list { text-align: left; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin: 0 20px 20px; }
+.imig-data-item { margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; display:flex; justify-content:space-between; align-items:center;}
+.imig-data-item:last-child { border-bottom: 0; padding-bottom: 0; margin-bottom: 0;}
+.imig-data-label { font-size: 0.8rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
+.imig-data-value { font-size: 1rem; color: #0f172a; font-weight: 700; text-align:right;}
+.status-highlight { background: #002D62; color: #f9c74f; padding: 5px 12px; border-radius: 4px; display: inline-block; font-size: 0.85rem; }
+.imig-popup-btn { width: calc(100% - 40px); padding: 14px; background: #002D62; color: #fff; border: none; font-weight: 600; cursor: pointer; border-radius: 8px; font-family:'Outfit';}
+.imig-popup-btn:hover { background: #f9c74f; color: #002D62; }
+
+/* --- TIMELINE --- */
+.tracking-timeline-wrapper { background: #ffffff; padding-bottom: 5px; }
+.tracking-timeline { display: flex; justify-content: space-between; margin: 10px 10px; position: relative; }
+.tracking-timeline::before { content: ''; position: absolute; top: 15px; left: 10%; right: 10%; height: 3px; background: #e2e8f0; z-index: 1; }
+.timeline-step { position: relative; z-index: 2; text-align: center; flex: 1; }
+.timeline-icon { width: 32px; height: 32px; background: #e2e8f0; color: #94a3b8; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 8px; font-size: 0.85rem; border: 3px solid #fff; transition: 0.3s; }
+.timeline-text { font-size: 0.7rem; color: #64748b; font-weight: 600; line-height: 1.2; }
+.timeline-step.completed .timeline-icon { background: #10b981; color: #fff; border-color: #fff; }
+.timeline-step.completed .timeline-text { color: #10b981; }
+.timeline-step.active .timeline-icon { background: #f9c74f; color: #002D62; box-shadow: 0 0 0 3px rgba(249, 199, 79, 0.3); }
+.timeline-step.active .timeline-text { color: #002D62; font-weight: 800; }
+
+/* --- RESPONSIVE MOBILE (HP) --- */
+@media (max-width: 992px) {
+    .navbar-main-row { padding: 5px 15px; }
+    .logo-center-block { position: static !important; transform: none !important; flex: 1; text-align: center; display: flex; justify-content: center; }
+    .logo-center-block a { text-align: center !important; }
+    .logo-center-block strong { font-size: 12px; }
+    
+    .imigrasi-left-navbar { width: 280px; overflow-y: auto !important; }
+    
+    /* Di HP, submenu tidak boleh melompat ke kanan, tapi turun ke bawah */
+    .dropdown-box {
+        position: static; left: 0; width: 100%; background: #001f44; box-shadow: none; border-radius: 0; border-left: none;
+    }
+    .nav-item.has-submenu:hover .dropdown-box { display: none; } /* Matikan hover HP */
+    .nav-item.has-submenu.open .dropdown-box { display: block; } /* Aktifkan sistem klik */
+    
+    .nav-item.has-submenu:hover > .nav-link { background: transparent !important; color: #fff !important; }
+    .submenu-item a { padding-left: 45px; }
+}
+
+@media (max-width: 576px) {
+    .tracking-timeline { flex-direction: column; gap: 15px; margin: 10px 20px; }
+    .tracking-timeline::before { width: 3px; height: calc(100% - 30px); left: 15px; top: 15px; right: auto; }
+    .timeline-step { display: flex; align-items: center; text-align: left; gap: 15px; }
+    .timeline-icon { margin: 0; }
+    .timeline-text { font-size: 0.85rem; }
+}

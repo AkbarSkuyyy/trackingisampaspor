@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; }
+
+body { 
+    margin: 0; 
+    font-family: 'Outfit', sans-serif; 
+    background-color: #f4f6f9; 
+    color: #334155; 
+}
+
+/* Sidebar Admin Desktop */
+.admin-sidebar { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 280px; 
+    height: 100vh; 
+    background-color: #002D62; /* Biru Resmi Imigrasi */
+    color: #ffffff; 
+    display: flex; 
+    flex-direction: column; 
+    z-index: 1000; 
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1); 
+    transition: transform 0.3s ease, left 0.3s ease; transform: translateX(0);
+}
+
+.sidebar-brand { 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-start; 
+    padding: 20px 25px; 
+    border-bottom: 1px solid rgba(255,255,255,0.05); 
+    gap: 15px; 
+}
+.sidebar-brand img { height: 45px; width: auto; }
+.brand-text-admin { display: flex; flex-direction: column; }
+.brand-text-admin span { font-weight: 700; font-family: 'Outfit'; }
+.brand-text-admin small { color: #f9c74f; font-weight: 600; font-size: 0.8rem; margin-top: 3px; }
+
+.admin-close-btn { display: none; } /* Hidden on Desktop */
+.mobile-admin-header { display: none; } /* Hidden on Desktop */
+.admin-sidebar-overlay { display: none; } /* Hidden on Desktop */
+
+.admin-nav { 
+    list-style: none; 
+    padding: 15px 0; 
+    margin: 0; 
+    flex: 1; 
+    overflow-y: auto; 
+}
+.admin-nav li a { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    padding: 16px 30px; 
+    color: #cbd5e1; 
+    text-decoration: none; 
+    font-weight: 500; 
+    font-size: 1rem;
+    transition: all 0.2s ease; 
+}
+.admin-nav li a i { font-size: 1.1rem; width: 20px; text-align: center; }
+.admin-nav li a:hover, .admin-nav li a.active { 
+    background: #ffffff; 
+    color: #002D62; 
+    border-left: 5px solid #f9c74f; 
+}
+
+.sidebar-footer { padding: 20px 25px; border-top: 1px solid rgba(255,255,255,0.05); }
+.sidebar-footer a { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    color: #ef4444; 
+    text-decoration: none; 
+    font-weight: 600; 
+    padding: 12px 15px; 
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 8px; 
+    transition: 0.3s; 
+}
+.sidebar-footer a:hover { background: #ef4444; color: #ffffff; }
+
+/* Main Content Area */
+.admin-main { 
+    margin-left: 280px; 
+    padding: 40px; 
+    min-height: 100vh; 
+}
+.admin-header { margin-bottom: 35px; }
+.admin-header h2 { margin: 0; color: #002D62; font-size: 2rem; font-weight: 800; }
+
+/* Cards & Layout */
+.admin-card { 
+    background: #ffffff; 
+    padding: 30px; 
+    border-radius: 16px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+    margin-bottom: 30px; 
+    border-top: 5px solid #002D62; 
+}
+.card-title { 
+    margin-top: 0; 
+    margin-bottom: 25px; 
+    font-size: 1.25rem; 
+    color: #002D62; 
+    font-weight: 700; 
+    border-bottom: 2px solid #f4f6f9; 
+    padding-bottom: 15px; 
+}
+
+/* Forms */
+.form-row { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;}
+.form-group { flex: 1; min-width: 250px;}
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #475569; font-size: 0.95rem;}
+.form-group input, .form-group select { 
+    width: 100%; padding: 14px 16px; border: 2px solid #cbd5e1; 
+    border-radius: 8px; font-family: 'Outfit'; font-size: 1rem; background-color: #f8fafc; transition: 0.3s;
+}
+.form-group input:focus, .form-group select:focus { outline: none; border-color: #002D62; background-color: #ffffff; }
+
+.btn-submit { 
+    background: #002D62; color: #ffffff; border: none; padding: 16px 30px; 
+    border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 1.05rem; 
+    font-family: 'Outfit'; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-submit:hover { background: #f9c74f; color: #002D62; transform: translateY(-2px); }
+
+/* Tables */
+.table-responsive { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+table th, table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 1rem; }
+table th { background: #f8fafc; color: #002D62; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px;}
+table tr:hover { background-color: #f8fafc; }
+
+.badge { background: #e0f2fe; color: #0369a1; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; border: 1px solid #bae6fd;}
+.btn-hapus { background: #fee2e2; color: #ef4444; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.2s;}
+.btn-hapus:hover { background: #ef4444; color: #ffffff; }
+
+/* Alerts */
+.alert { padding: 16px 20px; border-radius: 8px; margin-bottom: 25px; font-weight: 500; font-size: 1rem; display: flex; align-items: center; gap: 12px;}
+.alert-success { background: #dcfce7; color: #065f46; border-left: 5px solid #10b981; }
+.alert-error { background: #fee2e2; color: #991b1b; border-left: 5px solid #ef4444; }
+
+/* RESPONSIVE MOBILE FIXES */
+@media (max-width: 768px) {
+    .mobile-admin-header {
+        display: flex; justify-content: space-between; align-items: center;
+        background: #002D62; color: white; padding: 15px 20px;
+        position: fixed; top: 0; left: 0; width: 100%; z-index: 990;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .mobile-brand { display: flex; align-items: center; gap: 12px; }
+    .mobile-brand img { height: 35px; width: auto; }
+    .mobile-brand span { font-weight: 700; font-family: 'Outfit'; font-size: 1.1rem; }
+    
+    #adminNavToggle { background: transparent; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    
+    .admin-main { margin-left: 0; padding: 100px 20px 30px 20px; } /* Ruang untuk header top */
+    
+    .admin-sidebar {
+        transform: translateX(-100%); /* Sembunyi dari layar */
+    }
+    .admin-sidebar.open {
+        transform: translateX(0); /* Muncul */
+    }
+    
+    .admin-close-btn { display: block; background: transparent; border: none; color: #ffffff; font-size: 1.5rem; margin-left: auto; cursor: pointer; }
+    
+    .admin-sidebar-overlay {
+        display: block; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0, 0, 40, 0.6); z-index: 995;
+        opacity: 0; visibility: hidden; transition: 0.3s;
+    }
+    .admin-sidebar-overlay.open { opacity: 1; visibility: visible; }
+}
+
+/* Action Buttons (Edit & Hapus) */
+.action-buttons { display: flex; gap: 8px; }
+
+.btn-edit { 
+    background: #fef08a; 
+    color: #b45309; 
+    padding: 8px 15px; 
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    transition: 0.2s; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 5px; 
+    border: none; 
+    cursor: pointer; 
+}
+.btn-edit:hover { background: #eab308; color: #ffffff; }
+
+/* Pagination */
+.pagination { display: flex; justify-content: center; gap: 8px; margin-top: 25px; flex-wrap: wrap; }
+.page-link { padding: 8px 15px; background: #ffffff; color: #002D62; border: 2px solid #cbd5e1; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; font-family: 'Outfit'; }
+.page-link:hover { background: #f8fafc; border-color: #002D62; transform: translateY(-2px); }
+.page-link.active { background: #002D62; color: #f9c74f; border-color: #002D62; }
